@@ -5,7 +5,6 @@ import { useRouter } from "next/router"
 import { signOut } from "firebase/auth"
 import { signInWithGoogle } from "../../util/firebase"
 import { useAuth } from "../auth/AuthUserProvider"
-import path from "path"
 
 type NavLinkData = {
   name: string
@@ -56,7 +55,7 @@ const Navbar = () => {
             _focusVisible={{ shadow: "outline" }}
             _focus={{ shadow: "none" }}
             colorScheme={"purple"}
-            onClick={user ? signOut : signInWithGoogle}
+            onClick={user ? () => signOut : () => signInWithGoogle()}
           >
             {user ? "Sign Out" : "Sign In"}
           </Button>
