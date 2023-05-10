@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Button, FormControl, FormLabel, Heading, List, ListItem, ListIcon, Select, Text, VStack, Textarea } from "@chakra-ui/react";
 import Layout from "../components/layout/Layout";
+import SaveControl, { saveRecipe } from "../components/save/SaveControl";
 import apiKey from "../config";
+import { useAuth } from "../components/auth/AuthUserProvider";
 
 type RecipeType = "Breakfast" | "Lunch" | "Dinner" | "Dessert";
 
 const RecipeGeneratorPage = () => {
+  const { user } = useAuth();
   const [recipeType, setRecipeType] = useState<RecipeType>("Breakfast");
   const [recipeName, setRecipeName] = useState<string>("");
   const [recipeIngredients, setRecipeIngredients] = useState<string>("");
@@ -18,11 +21,8 @@ const RecipeGeneratorPage = () => {
 
   const { Configuration, OpenAIApi } = require("openai");
 
-  const key: string = `${process.env.REACT_APP_API_KEY}`;
-
-  console.log(key)
   const configuration = new Configuration({
-    apiKey: process.env.REACT_APP_API_KEY,
+    apiKey: apiKey,
     organization: "org-GaBNRzuTQqo5qLEULfjgwT2B"
   });
 
@@ -40,7 +40,7 @@ const RecipeGeneratorPage = () => {
     const recipeText = response.data.choices[0].text.trim();
     console.log(recipeText)
     // Split the recipe into a list of ingredients and instructions and name
-    const recipeName = recipeText[0];
+    const recipeNameIndex = recipeText[0];
     const ingredientsStartIndex = recipeText.indexOf("Ingredients:");
     const ingredientsEndIndex = recipeText.indexOf("Instructions:");
     const ingredients = recipeText.slice(ingredientsStartIndex + 12, ingredientsEndIndex).split("\n");
@@ -51,11 +51,13 @@ const RecipeGeneratorPage = () => {
     const filteredIngredients = ingredients.filter((item: string) => item !== "");
     const filteredInstructions = instructions.filter((item: string) => item !== "");
 
-    setRecipeName(recipeText.slice(recipeName + 11, ingredientsStartIndex).trim());
+    setRecipeName(recipeText.slice(recipeNameIndex + 11, ingredientsStartIndex).trim());
     setRecipeIngredients(filteredIngredients.join("\n"));
     setRecipeInstructions(filteredInstructions.join("\n"));
     setIsLoading(false);
   };
+
+
 
   return (
     <Layout title="Recipe Generator">
@@ -85,6 +87,20 @@ const RecipeGeneratorPage = () => {
               <FormLabel fontWeight="bold" fontSize="lg">Instructions:</FormLabel>
               <Textarea value={recipeInstructions} readOnly />
             </FormControl>
+            {user ? (
+              <SaveControl
+                recipe={{
+                  name: recipeName,
+                  type: recipeType,
+                  ingredients: recipeIngredients,
+                  instructions: recipeInstructions,
+                  author: user.uid
+                }}
+                userId={user.uid}
+              />
+            ) : (
+              <Text>Please sign in to save recipes.</Text>
+            )}
           </>
         )}
       </VStack>
@@ -94,4 +110,3 @@ const RecipeGeneratorPage = () => {
 
 
 export default RecipeGeneratorPage;
-

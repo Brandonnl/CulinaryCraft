@@ -17,6 +17,12 @@ const navData: NavLinkData =
   path: "/",
 }
 
+const savedRecipes: NavLinkData =
+{
+  name: "Recipes",
+  path: "/RecipesPage",
+}
+
 const NavLink = ({ name, path }: NavLinkData) => {
   const { pathname: currentPath } = useRouter()
   return (
@@ -47,6 +53,7 @@ const Navbar = () => {
       <HStack justifyContent="space-between">
         <HStack h={14} as="nav" spacing={4} alignItems="center">
           <NavLink {...navData} />
+          <NavLink {...savedRecipes} />
         </HStack>
         <HStack>
           <HStack h={14} as="nav" spacing={4} alignItems="center">
@@ -66,4 +73,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-

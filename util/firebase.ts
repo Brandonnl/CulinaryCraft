@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp } from "firebase/app"
-import { getFirestore } from "firebase/firestore"
+import { addDoc, collection, getFirestore } from "firebase/firestore"
 import {
   getAuth,
   GoogleAuthProvider,
@@ -19,6 +19,7 @@ const firebaseConfig = {
   messagingSenderId: "271522345402",
   appId: "1:271522345402:web:c6dd65ac5447cca73aed83"
 };
+
 
 
 
