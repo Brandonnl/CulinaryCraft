@@ -94,7 +94,8 @@ const RecipeGeneratorPage = () => {
                   type: recipeType,
                   ingredients: recipeIngredients,
                   instructions: recipeInstructions,
-                  author: user.uid
+                  author: user.uid,
+                  id: user.uid,
                 }}
                 userId={user.uid}
               />
