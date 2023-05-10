@@ -41,7 +41,7 @@ const NavLink = ({ name, path }: NavLinkData) => {
 }
 
 const Navbar = () => {
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
   return (
     <Box px={4} shadow="base">
       <HStack justifyContent="space-between">
@@ -55,7 +55,7 @@ const Navbar = () => {
             _focusVisible={{ shadow: "outline" }}
             _focus={{ shadow: "none" }}
             colorScheme={"purple"}
-            onClick={user ? () => signOut : () => signInWithGoogle()}
+            onClick={user ? signOut : signInWithGoogle}
           >
             {user ? "Sign Out" : "Sign In"}
           </Button>

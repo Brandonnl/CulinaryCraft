@@ -18,8 +18,11 @@ const RecipeGeneratorPage = () => {
 
   const { Configuration, OpenAIApi } = require("openai");
 
+  const key: string = `${process.env.REACT_APP_API_KEY}`;
+
+  console.log(key)
   const configuration = new Configuration({
-    apiKey: apiKey,
+    apiKey: process.env.REACT_APP_API_KEY,
     organization: "org-GaBNRzuTQqo5qLEULfjgwT2B"
   });
 
