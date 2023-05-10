@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, FormControl, FormLabel, Heading, List, ListItem, ListIcon, Select, Text, VStack, Textarea } from "@chakra-ui/react";
 import Layout from "../components/layout/Layout";
-// import apiKey from "../config";
+import apiKey from "../config";
 
 type RecipeType = "Breakfast" | "Lunch" | "Dinner" | "Dessert";
 
