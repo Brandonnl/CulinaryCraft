@@ -20,8 +20,6 @@ This is a Recipe-Generator App built with React and Firebase. It allows users to
 
 ## Recipe Generation with OpenAI
 
-The recipe generation feature in this app is implemented using OpenAI's text generation model. When a user selects a recipe type (breakfast, lunch, dinner, dessert) and clicks on the "Generate Recipe" button, a request is made to the OpenAI API to generate a random recipe based on the selected type.
-
 The app uses the OpenAI GPT-3 model, specifically the `text-davinci-003` model, for generating recipes. It sends a prompt to the model in the format of "Generate a [recipe type] recipe and the name of the dish" and receives a response with a randomly generated recipe.
 
 ## Contributing
