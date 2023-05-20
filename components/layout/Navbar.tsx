@@ -1,30 +1,28 @@
-import React from "react"
-import NextLink from "next/link"
-import { Box, Button, HStack, Link } from "@chakra-ui/react"
-import { useRouter } from "next/router"
-import { signOut } from "firebase/auth"
-import { signInWithGoogle } from "../../util/firebase"
-import { useAuth } from "../auth/AuthUserProvider"
+import React from "react";
+import NextLink from "next/link";
+import { Box, Button, HStack, Link } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { signOut } from "firebase/auth";
+import { signInWithGoogle } from "../../util/firebase";
+import { useAuth } from "../auth/AuthUserProvider";
 
 type NavLinkData = {
-  name: string
-  path: string
-}
+  name: string;
+  path: string;
+};
 
-const navData: NavLinkData =
-{
+const navData: NavLinkData = {
   name: "Home",
   path: "/",
-}
+};
 
-const savedRecipes: NavLinkData =
-{
+const savedRecipes: NavLinkData = {
   name: "Recipes",
   path: "/RecipesPage",
-}
+};
 
 const NavLink = ({ name, path }: NavLinkData) => {
-  const { pathname: currentPath } = useRouter()
+  const { pathname: currentPath } = useRouter();
   return (
     <NextLink key={path} href={path} passHref legacyBehavior>
       <Link
@@ -44,20 +42,18 @@ const NavLink = ({ name, path }: NavLinkData) => {
       </Link>
     </NextLink>
   );
-}
+};
 
 const Navbar = () => {
-  const { user, signOut } = useAuth()
+  const { user, signOut } = useAuth();
   return (
-    <Box px={4} shadow="base">
+    <Box px={4} shadow="base" top={0} left={0} right={0} zIndex={999}>
       <HStack justifyContent="space-between">
         <HStack h={14} as="nav" spacing={4} alignItems="center">
           <NavLink {...navData} />
           <NavLink {...savedRecipes} />
         </HStack>
         <HStack>
-          <HStack h={14} as="nav" spacing={4} alignItems="center">
-          </HStack>
           <Button
             _focusVisible={{ shadow: "outline" }}
             _focus={{ shadow: "none" }}
@@ -69,7 +65,7 @@ const Navbar = () => {
         </HStack>
       </HStack>
     </Box>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
