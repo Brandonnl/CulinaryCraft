@@ -31,7 +31,7 @@ const WelcomePage = () => (
           textShadow="2px 2px 4px rgba(0, 0, 0, 0.4)"
           color="purple.700"
         >
-          Recipe Generator
+          CulinaryCraft
         </Heading>
         <Text fontSize="xl" textAlign="center" color="gray.700">
           Get inspired with new and exciting recipes.
