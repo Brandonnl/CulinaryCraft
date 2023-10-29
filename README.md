@@ -1,4 +1,4 @@
-# Recipe Generator
+#  CulinaryCraft
 
 This is a Recipe-Generator App built with React and Firebase. It allows users to generate random recipes, save them to their account, and view their saved recipes. The recipe generation is powered by OpenAI's text generation model. It can take up to 15 seconds for recipes to generate.
 
